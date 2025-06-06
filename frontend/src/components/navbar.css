@@ -1,0 +1,59 @@
+.menu {
+ transform: translate3d(0, -2rem, 0);
+ opacity: 0;
+ animation: menu-items 0.5s ease-in-out forwards;
+}
+
+/* animation: name duration timing-function delay iteration-count direction fill-mode */
+
+.register {
+ transform: translate3d(0, -1rem, 0);
+ opacity: 0;
+ animation: menu-items 0.5s ease-in-out 0.2s forwards;
+}
+
+.about {
+ opacity: 0;
+ animation: menu-items 0.5s ease-in-out 0.4s forwards
+}
+
+.line {
+ transform: translate3d(0, 1rem, 0);
+ opacity: 0;
+ animation: menu-items 0.5s ease-in-out 0.4s forwards;
+}
+
+.sign-out {
+ transform: translate3d(0, 1rem, 0);
+ opacity: 0;
+ animation: menu-items 0.5s ease-in-out 0.5s forwards;
+}
+
+@keyframes menu-items {
+ 100% {
+  transform: translate3d(0, 0, 0);
+  opacity: 1;
+ }
+}
+
+/* animation: name duration timing-function delay iteration-count direction fill-mode */
+
+.cross {
+ animation: animate-cross 0.5s ease-out 0s 1 alternate-reverse;
+}
+
+@keyframes animate-cross {
+ 100% {
+  transform: rotate(90deg);
+ }
+}
+
+.hamburger {
+ animation: animate-hamburger 0.5s ease-out 0s 1 alternate;
+}
+
+@keyframes animate-hamburger {
+ 100% {
+  transform: rotate(180deg);
+ }
+}
