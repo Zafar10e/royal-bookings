@@ -2,9 +2,13 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router'
 import Layout from './layouts/Layout'
 import Register from './pages/register'
 import SignIn from './pages/sign-in'
+import AddHotel from './pages/addHotel'
+import { useAppContext } from './contexts/AppContext'
+
+
 
 function App() {
-
+  const { isLoggedIn } = useAppContext()
   return (
     <BrowserRouter>
       <Routes>
@@ -19,6 +23,9 @@ function App() {
         } />
         <Route path='/register' element={<Register />} />
         <Route path='/sign-in' element={<SignIn />} />
+        {isLoggedIn && (
+          <Route path='/add-hotel' element={<AddHotel />} />
+        )}
         <Route path='*' element={<Navigate to='/' />} />
       </Routes>
     </BrowserRouter>

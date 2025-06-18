@@ -16,7 +16,7 @@ test('should allow user to sign in', async ({ page }) => {
 
  await page.getByRole('button', { name: 'Login' }).click()
 
- expect(page.getByText('Sign in successful!'))
+ await expect(page.getByText('Sign in successful!')).toBeVisible()
  await expect(page.getByRole('link', { name: 'My Bookings' })).toBeVisible()
  await expect(page.getByRole('link', { name: 'My Hotels' })).toBeVisible()
  await expect(page.getByRole('button', { name: 'Sign-out' })).toBeVisible()
@@ -26,9 +26,7 @@ test('should allow user to sign in', async ({ page }) => {
 test('should allow user to register', async ({ page }) => {
  const testEmail = `testEmail_${Math.floor(Math.random() * 90000) + 10000}@ali.com`
 
-
- await
-  page.goto(UI_URL)
+ await page.goto(UI_URL)
 
  await page.getByRole('link', { name: 'Sign-in' }).click()
  await page.getByRole('link', { name: 'Create an account here!' }).click()
@@ -43,7 +41,7 @@ test('should allow user to register', async ({ page }) => {
 
  await page.getByRole('button', { name: 'Create Account' }).click()
 
- expect(page.getByText('Registration Successful!')).toBeVisible()
+ await expect(page.getByText('Registration Successful!')).toBeVisible()
  await expect(page.getByRole('link', { name: 'My Bookings' })).toBeVisible()
  await expect(page.getByRole('link', { name: 'My Hotels' })).toBeVisible()
  await expect(page.getByRole('button', { name: 'Sign-out' })).toBeVisible()

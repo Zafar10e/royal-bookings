@@ -13,7 +13,7 @@ const Navbar = () => {
   const [toggleMenu, setToggleMenu] = useState(false)
 
   return (
-    <div className="flex bg-gradient-to-r from-blue-950 via-blue-900 to-blue-950 py-4">
+    <div className="flex bg-gradient-to-r from-blue-900 via-blue-800 to-blue-900 py-4">
       <div className="flex relative container mx-auto items-center justify-between">
         <span className="text-lg md:2xl font-semibold text-white tracking-tighter">
           <Link to='/'>RoyalBookings.com</Link>

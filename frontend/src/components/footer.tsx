@@ -1,6 +1,6 @@
 const Footer = () => {
  return (
-  <div className="bg-gradient-to-r from-blue-950 via-blue-900 to-blue-950 py-6 sm:py-8">
+  <div className="bg-gradient-to-r from-blue-900 via-blue-800 to-blue-900 py-6 sm:py-8">
    <div className="container mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
     <span className="text-xl text-white font-semibold tracking-tight">
      RoyalBookings.com
