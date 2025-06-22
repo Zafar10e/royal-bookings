@@ -1,9 +1,10 @@
 import express, { Request, Response } from 'express'
 import multer from 'multer'
 import cloudinary from 'cloudinary'
-import Hotel, { HotelType } from '../models/hotel'
+import Hotel from '../models/hotel'
 import verifyToken from '../middleware/auth'
 import { body } from 'express-validator'
+import { HotelType } from '../shared/types'
 
 const router = express.Router()
 
@@ -16,8 +17,7 @@ const upload = multer({
 })
 
 //api/my-hotels 
-router.post('/',
- verifyToken, [
+router.post('/', verifyToken, [
  body('name').notEmpty().withMessage('*Name is required!'),
  body('city').notEmpty().withMessage('*City is required!'),
  body('country').notEmpty().withMessage('*Country is required!'),
@@ -27,9 +27,11 @@ router.post('/',
  body('facilities').notEmpty().isArray().withMessage('*Facilities are required!'),
 ],
  upload.array('imageFiles', 6),
+
  async (req: Request, res: Response) => {
   try {
    const imageFiles = req.files as Express.Multer.File[]
+
    const newHotel: HotelType = req.body
 
    //1. upload images to cloudinary
@@ -56,9 +58,23 @@ router.post('/',
 
   } catch (err) {
    console.log('Error creating hotel', err)
-   res.status(500).json({ message: 'Something went wrong' })
+   res.status(500).json({ message: 'Err creating hotel!' })
   }
  })
+
+
+
+router.get('/', verifyToken, async (req: Request, res: Response) => {
+ try {
+  const hotels = await Hotel.find({ userId: req.userId })
+  res.json(hotels)
+  return
+ } catch (err) {
+  console.log('Err fetching hotels:' + err)
+  res.status(500).json({ message: 'Err fetching hotels!' })
+  return
+ }
+})
 
 
 export default router;

@@ -21,4 +21,23 @@ const Layout = ({ children }: Props) => {
  )
 }
 
+
+export const MiniLayout = ({ children }: Props) => {
+ return (
+  <div className="flex flex-col min-h-screen">
+   <Navbar />
+   <Hero />
+   {children}
+   <Footer />
+  </div>
+ )
+
+}
+
+
+
+
+
 export default Layout;
+
+
