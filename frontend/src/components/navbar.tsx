@@ -30,9 +30,9 @@ const Navbar = () => {
             <div className="border border-white rounded hover:border-red-200  p-0.5">
               <Link to='/register' className="flex items-center px-3 py-0.5 text-blue-950 rounded bg-gray-50 hover:bg-gray-100 font-semibold text-lg text-nowrap hover:underline">Register</Link>
             </div>
-            <div className="border border-white rounded p-0.5 hover:border-red-200">
+            <span className="border border-white rounded p-0.5 hover:border-red-200">
               <Link to='/sign-in' className="flex items-center font-semibold text-lg text-blue-950 text-nowrap bg-gray-50 px-3 py-0.5 rounded hover:underline hover:bg-gray-100">Sign-in</Link>
-            </div>
+            </span>
           </div>
         )}
 

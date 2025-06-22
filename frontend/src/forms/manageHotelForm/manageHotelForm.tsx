@@ -55,27 +55,22 @@ const ManageHotelForm = ({ onSave, isPending }: Props) => {
  })
 
  return (
-  <div className="flex flex-col min-h-screen">
-   <Navbar />
-   <Hero />
-   <FormProvider {...formMethods}>
-    <form onSubmit={onSubmit} className="container mx-auto flex flex-col flex-1 gap-10 py-10">
-     <DetailsSection />
-     <TypeSection />
-     <FacilitiesSection />
-     <GuestsSection />
-     <ImagesSection />
-     <span className="flex justify-end px-10">
-      <span className="border border-blue-800 p-0.5 rounded">
-       <button type="submit" disabled={isPending} className="bg-blue-700 rounded py-1.5 px-5 text-white font-semibold text-lg hover:bg-blue-600 cursor-pointer disabled:bg-gray-500">
-        {isPending ? 'Saving...' : 'Save Hotel'}
-       </button>
-      </span>
+  <FormProvider {...formMethods}>
+   <form onSubmit={onSubmit} className="container mx-auto flex flex-col flex-1 gap-10 py-10">
+    <DetailsSection />
+    <TypeSection />
+    <FacilitiesSection />
+    <GuestsSection />
+    <ImagesSection />
+    <span className="flex justify-end px-10">
+     <span className="border border-blue-800 p-0.5 rounded">
+      <button type="submit" disabled={isPending} className="bg-blue-700 rounded py-1.25 px-5 text-white font-semibold text-lg hover:bg-blue-600 cursor-pointer disabled:bg-gray-500">
+       {isPending ? 'Saving...' : 'Save Hotel'}
+      </button>
      </span>
-    </form>
-   </FormProvider>
-   <Footer />
-  </div>
+    </span>
+   </form>
+  </FormProvider>
  )
 }
 

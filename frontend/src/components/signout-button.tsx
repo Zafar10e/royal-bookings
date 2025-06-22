@@ -10,7 +10,6 @@ const SignOutButton = () => {
  const { mutate } = useMutation({
   mutationFn: apiClient.signOut,
   onSuccess: async (data) => {
-   console.log(data)
    await queryClient.invalidateQueries({
     queryKey: ['validateToken']
    })
@@ -27,7 +26,7 @@ const SignOutButton = () => {
 
  return (
   <div className="border border-white rounded p-0.5">
-   <button onClick={handleClick} className="text-blue-900 px-3 py-1 bg-white text-lg font-semibold rounded hover:bg-gray-100">Sign-out</button>
+   <button onClick={handleClick} className="text-blue-900 px-3 py-0.5 bg-white text-lg font-semibold rounded hover:bg-gray-100">Sign-out</button>
   </div>
  )
 }
