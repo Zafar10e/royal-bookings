@@ -1,7 +1,4 @@
 import { useForm } from "react-hook-form"
-import Navbar from "../components/navbar"
-import Hero from "../components/hero"
-import Footer from "../components/footer"
 import * as apiClient from '../api-client'
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { useAppContext } from "../contexts/AppContext"

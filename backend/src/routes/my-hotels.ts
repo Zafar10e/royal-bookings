@@ -18,13 +18,13 @@ const upload = multer({
 
 //api/my-hotels 
 router.post('/', verifyToken, [
- body('name').notEmpty().withMessage('*Name is required!'),
- body('city').notEmpty().withMessage('*City is required!'),
- body('country').notEmpty().withMessage('*Country is required!'),
- body('pricePerNight').notEmpty().isNumeric().withMessage('*Price per night must be a number!'),
- body('description').notEmpty().withMessage('*Description is required!'),
- body('type').notEmpty().withMessage('*Hotel type is required!'),
- body('facilities').notEmpty().isArray().withMessage('*Facilities are required!'),
+ body('name').notEmpty().withMessage('Name is required!'),
+ body('city').notEmpty().withMessage('City is required!'),
+ body('country').notEmpty().withMessage('Country is required!'),
+ body('pricePerNight').notEmpty().isNumeric().withMessage('Price per night must be a number!'),
+ body('description').notEmpty().withMessage('Description is required!'),
+ body('type').notEmpty().withMessage('Hotel type is required!'),
+ body('facilities').notEmpty().isArray().withMessage('Atleast one facility is required!'),
 ],
  upload.array('imageFiles', 6),
 
@@ -73,6 +73,22 @@ router.get('/', verifyToken, async (req: Request, res: Response) => {
   console.log('Err fetching hotels:' + err)
   res.status(500).json({ message: 'Err fetching hotels!' })
   return
+ }
+})
+
+
+router.get('/:id', verifyToken, async (req: Request, res: Response) => {
+ const id = req.params.id.toString()
+ try {
+  const hotel = await Hotel.find({
+   _id: id,
+   userId: req.userId
+  })
+  res.json(hotel)
+  return
+ } catch (err) {
+  console.log('Err fetching user hotels' + err)
+  res.status(500).json({ message: 'Error fetching hotels!' })
  }
 })
 

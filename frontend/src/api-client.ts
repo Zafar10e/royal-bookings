@@ -48,7 +48,9 @@ export const signIn = async (formData: SignInFormData) => {
 
 
 export const validateToken = async () => {
- const res = await fetch(`${API_BASE_URL}/api/auth/validate-token`, { credentials: 'include' })
+ const res = await fetch(`${API_BASE_URL}/api/auth/validate-token`, {
+  credentials: 'include'
+ })
 
  const resBody = await res.json()
  if (!res.ok) {
@@ -62,14 +64,14 @@ export const validateToken = async () => {
 
 export const signOut = async () => {
  const res = await fetch(`${API_BASE_URL}/api/auth/logout`, {
-  credentials: 'include',
-  method: 'POST'
+  method: 'POST',
+  credentials: 'include'
  })
 
  const resBody = await res.json()
 
  if (!res.ok) {
-  throw new Error('Error during sign out:' + resBody.message)
+  throw new Error('Sign out Err:' + resBody.message)
  }
 
  return resBody;
