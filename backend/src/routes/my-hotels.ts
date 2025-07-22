@@ -80,7 +80,7 @@ router.get('/', verifyToken, async (req: Request, res: Response) => {
 router.get('/:id', verifyToken, async (req: Request, res: Response) => {
  const id = req.params.id.toString()
  try {
-  const hotel = await Hotel.find({
+  const hotel = await Hotel.findOne({
    _id: id,
    userId: req.userId
   })
@@ -88,7 +88,7 @@ router.get('/:id', verifyToken, async (req: Request, res: Response) => {
   return
  } catch (err) {
   console.log('Err fetching user hotels' + err)
-  res.status(500).json({ message: 'Error fetching hotels!' })
+  res.status(500).json({ message: 'Error fetching hotel!' })
  }
 })
 

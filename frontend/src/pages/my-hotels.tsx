@@ -12,24 +12,24 @@ const MyHotels = () => {
  })
 
  if (!hotelData) {
-  return <span>No hotels found</span>
+  return <div className="flex flex-col flex-1 items-center justify-center text-xl font-semibold">You does't own any hotels yet...!!!</div>
  }
 
  return (
   <div className="flex flex-col flex-1 container mx-auto gap-8 my-10">
-   <span className="flex justify-between">
-    <h1 className="text-3xl font-bold text-gray-800">My Hotels</h1>
-    <span className=" border border-blue-800 p-0.5 rounded ">
-     <Link to='/add-hotel' className="flex bg-blue-700 text-white font-semibold py-1.5  px-3 rounded hover:bg-blue-600">Add New Hotel</Link>
+   <div className="flex justify-between">
+    <h1 className="text-3xl font-bold text-gray-700">My Hotels</h1>
+    <span className=" border border-blue-800 p-0.5 mt-1 rounded-md ">
+     <Link to='/add-hotel' className="flex bg-blue-700 text-white font-semibold py-1.25  px-2.5 rounded hover:bg-blue-600">Add New Hotel</Link>
     </span>
-   </span>
+   </div>
 
    <div className="flex flex-col gap-5">
     {hotelData.map(hotel => (
-     <div className="flex flex-col justify-between border border-blue-500 rounded-lg p-4 gap-4">
+     <div className="flex flex-col justify-between border border-blue-500 text-gray-900 rounded-lg p-4 gap-4">
       <h2 className="text-xl font-semibold">{hotel.name}</h2>
       <div className="whitespace-pre-line">{hotel.description}</div>
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 text-gray-800">
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
        <div className="border border-blue-300 rounded-full p-1.5 flex items-center justify-around">
         <BsMap className="text-blue-700" />
         <span className="text-sm">
@@ -74,11 +74,11 @@ const MyHotels = () => {
         </span>
        </div>
       </div>
-      <span className="flex justify-end">
-       <span className="border border-blue-800 rounded p-0.5">
-        <Link to={`/edit-hotel/${hotel._id}`} className="flex py-1.25 px-3 rounded bg-blue-700 text-white font-semibold hover:bg-blue-600">View Details</Link>
+      <div className="flex justify-end">
+       <span className="border border-blue-800 rounded-full p-0.5">
+        <Link to={`/edit-hotel/${hotel._id}`} className="flex py-1 px-3 rounded-full bg-blue-700 text-white font-semibold hover:bg-blue-600">Edit Details</Link>
        </span>
-      </span>
+      </div>
      </div>
     ))}
    </div>

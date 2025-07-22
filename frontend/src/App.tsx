@@ -5,6 +5,7 @@ import AddHotel from './pages/addHotel'
 import { useAppContext } from './contexts/AppContext'
 import MyHotels from './pages/my-hotels'
 import Layout, { MiniLayout } from './layouts/layout'
+import EditHotel from './pages/editHotel'
 
 
 
@@ -43,13 +44,21 @@ function App() {
               <MiniLayout>
                 <AddHotel />
               </MiniLayout>
-
             } />
+
+            <Route
+              path='/edit-hotel/:hotelId'
+              element={
+                <MiniLayout>
+                  <EditHotel />
+                </MiniLayout>
+              }
+            />
+
             <Route path='/my-hotels' element={
               <MiniLayout>
                 <MyHotels />
               </MiniLayout>
-
             } />
           </>
         )}

@@ -7,7 +7,6 @@ const DetailsSection = () => {
 
  return (
   <div className="flex flex-col gap-3 px-10">
-   <h1 className="text-3xl font-bold pb-3 text-gray-700">Add Hotel</h1>
    <label className="flex flex-col text-gray-700 font-semibold">
     Name:
     <input className={`border focus:border-2 ${errors.name ? 'border-red-500' : 'border-blue-700'} p-2 rounded font-normal focus:outline-none`} {...register('name', { required: '*Name is required!' })} />

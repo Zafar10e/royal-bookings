@@ -1,12 +1,11 @@
 import { FormProvider, useForm } from "react-hook-form"
 import DetailsSection from "./detailsSection"
 import TypeSection from "./typeSection"
-import Navbar from "../../components/navbar"
-import Hero from "../../components/hero"
-import Footer from "../../components/footer"
 import FacilitiesSection from "./FacilitiesSection"
 import GuestsSection from "./GuestsSection"
 import ImagesSection from "./ImagesSection"
+import { HotelType } from "../../../../backend/src/shared/types"
+import { useEffect } from "react"
 
 export type HotelFormData = {
  name: string
@@ -18,6 +17,7 @@ export type HotelFormData = {
  starRating: number
  facilities: string[]
  imageFiles: FileList
+ imageUrls: string[]
  adultCount: number
  childCount: number
 }
@@ -25,11 +25,22 @@ export type HotelFormData = {
 type Props = {
  onSave: (hotelFormData: FormData) => void
  isPending: boolean
+ hotel?: HotelType
+ title: string
 }
 
-const ManageHotelForm = ({ onSave, isPending }: Props) => {
+const ManageHotelForm = ({ onSave, isPending, hotel, title }: Props) => {
  const formMethods = useForm<HotelFormData>()
- const { handleSubmit } = formMethods
+ const { handleSubmit, reset } = formMethods
+
+ {
+  hotel && (
+   useEffect(() => {
+    reset(hotel)
+   }, [hotel, reset])
+  )
+ }
+
 
  const onSubmit = handleSubmit((formDataJson: HotelFormData) => {
   const formData = new FormData()
@@ -57,18 +68,19 @@ const ManageHotelForm = ({ onSave, isPending }: Props) => {
  return (
   <FormProvider {...formMethods}>
    <form onSubmit={onSubmit} className="container mx-auto flex flex-col flex-1 gap-10 py-10">
+    <h1 className="text-3xl font-bold text-gray-700 px-10">{title}</h1>
     <DetailsSection />
     <TypeSection />
     <FacilitiesSection />
     <GuestsSection />
     <ImagesSection />
-    <span className="flex justify-end px-10">
-     <span className="border border-blue-800 p-0.5 rounded">
-      <button type="submit" disabled={isPending} className="bg-blue-700 rounded py-1.25 px-5 text-white font-semibold text-lg hover:bg-blue-600 cursor-pointer disabled:bg-gray-500">
+    <div className="flex justify-end px-10">
+     <span className="border border-blue-800 p-0.5 rounded-md">
+      <button type="submit" disabled={isPending} className="bg-blue-700 rounded py-1 px-5 text-white font-semibold text-lg hover:bg-blue-600 cursor-pointer disabled:bg-gray-500">
        {isPending ? 'Saving...' : 'Save Hotel'}
       </button>
      </span>
-    </span>
+    </div>
    </form>
   </FormProvider>
  )
