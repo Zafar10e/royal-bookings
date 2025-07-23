@@ -100,7 +100,7 @@ router.put('/:hotelId', verifyToken, upload.array('imageFiles', 6), async (req: 
   )
 
   if (!hotel) {
-   res.status(404).json({ message: 'Hotel not found!' })
+   res.status(404).json({ message: 'Hotel not found:[backend/src/routes/my-hotels/router.put]' })
    return
   }
 
@@ -116,8 +116,8 @@ router.put('/:hotelId', verifyToken, upload.array('imageFiles', 6), async (req: 
   res.status(201).json(hotel)
   return
  } catch (err) {
-  console.log('Err updating hotel: ' + err)
-  res.status(500).json({ message: 'Something  went wrong!' })
+  console.log('Err updating hotel:[backend/src/routes/my-hotels/router.put] ' + err)
+  res.status(500).json({ message: 'Err updating hotel:[backend/src/routes/my-hotels/router.put]' })
  }
 })
 

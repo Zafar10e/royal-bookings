@@ -37,13 +37,14 @@ const ManageHotelForm = ({ onSave, isPending, hotel, title }: Props) => {
   hotel && (
    useEffect(() => {
     reset(hotel)
-   }, [hotel, reset])
+   }, [hotel])
   )
  }
 
 
  const onSubmit = handleSubmit((formDataJson: HotelFormData) => {
   const formData = new FormData()
+  formData.append('hotelId', hotel?._id.toString() || '')
   formData.append('name', formDataJson.name)
   formData.append('city', formDataJson.city)
   formData.append('country', formDataJson.country)
@@ -52,7 +53,7 @@ const ManageHotelForm = ({ onSave, isPending, hotel, title }: Props) => {
   formData.append('description', formDataJson.description)
   formData.append('type', formDataJson.type)
   formData.append('adultCount', formDataJson.adultCount.toString())
-  formData.append('childCount', formDataJson.childCount.toString())
+  formData.append('childCount', formDataJson.childCount?.toString())
 
   formDataJson.facilities.forEach((facility, i) => {
    formData.append(`facilities[${i}]`, facility)

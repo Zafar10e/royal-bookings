@@ -25,8 +25,8 @@ const EditHotel = () => {
       showToast({ message: 'Hotel updated successfully!', type: 'SUCCESS' })
       navigate('/')
     },
-    onError: () => {
-      showToast({ message: 'Err updating Hotel!', type: 'ERROR' })
+    onError: (err) => {
+      showToast({ message: `${err.message}`, type: 'ERROR' })
     }
   })
 
