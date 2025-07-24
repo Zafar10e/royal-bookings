@@ -86,40 +86,42 @@ router.get('/:id', verifyToken, async (req: Request, res: Response) => {
 })
 
 
-router.put('/:hotelId', verifyToken, upload.array('imageFiles', 6), async (req: Request, res: Response) => {
- try {
-  const updatedHotel: HotelType = req.body
-  updatedHotel.lastUpdated = new Date()
+router.put('/:hotelId', verifyToken,
+ upload.array('imageFiles', 6),
+ async (req: Request, res: Response) => {
+  try {
+   const updatedHotel: HotelType = req.body
+   updatedHotel.lastUpdated = new Date()
 
-  const hotel = await Hotel.findOneAndUpdate({
-   _id: req.params.hotelId,
-   userId: req.userId
-  },
-   updatedHotel,
-   { new: true }
-  )
+   const hotel = await Hotel.findOneAndUpdate({
+    _id: req.params.hotelId,
+    userId: req.userId
+   },
+    updatedHotel,
+    { new: true }
+   )
 
-  if (!hotel) {
-   res.status(404).json({ message: 'Hotel not found:[backend/src/routes/my-hotels/router.put]' })
+   if (!hotel) {
+    res.status(404).json({ message: 'Hotel not found:[backend/src/routes/my-hotels/router.put]' })
+    return
+   }
+
+   const files = req.files as Express.Multer.File[]
+   const updatedImageUrls = await uploadImages(files)
+
+   hotel.imageUrls = [
+    ...updatedImageUrls,
+    ...(updatedHotel.imageUrls || [])
+   ]
+
+   await hotel.save()
+   res.status(201).json(hotel)
    return
+  } catch (err) {
+   console.log('Err updating hotel:[backend/src/routes/my-hotels/router.put] ' + err)
+   res.status(500).json({ message: 'Err updating hotel:[backend/src/routes/my-hotels/router.put]' })
   }
-
-  const files = req.files as Express.Multer.File[]
-  const updatedImageUrls = await uploadImages(files)
-
-  hotel.imageUrls = [
-   ...updatedImageUrls,
-   ...(updatedHotel.imageUrls || [])
-  ]
-
-  await hotel.save()
-  res.status(201).json(hotel)
-  return
- } catch (err) {
-  console.log('Err updating hotel:[backend/src/routes/my-hotels/router.put] ' + err)
-  res.status(500).json({ message: 'Err updating hotel:[backend/src/routes/my-hotels/router.put]' })
- }
-})
+ })
 
 
 async function uploadImages(imageFiles: Express.Multer.File[]) {

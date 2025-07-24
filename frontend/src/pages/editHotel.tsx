@@ -36,7 +36,7 @@ const EditHotel = () => {
 
   return (
     hotel ? <ManageHotelForm onSave={handleSave} isPending={isPending} hotel={hotel} title='Edit Hotel' />
-      : <div className='flex justify-center items-center mt-10 font-semibold text-lg'> Loading...</div>
+      : <div className='flex flex-col flex-1 justify-center items-center mt-10 font-semibold text-lg'> Loading...</div>
   )
 
 }
