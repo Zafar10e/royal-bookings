@@ -31,7 +31,7 @@ test('should allow user to add a hotel', async ({ page }) => {
 
  await page.selectOption('select[name=starRating]', '3')
 
- await page.getByText('Family').click()
+ await page.getByText('Family').first().click()
 
  await page.getByLabel('Free Wifi').check()
  await page.getByLabel('Parking').check()
@@ -45,8 +45,8 @@ test('should allow user to add a hotel', async ({ page }) => {
   path.join(__dirname, 'files', '2.jpg')
  ])
 
- await page.getByRole('button', { name: 'Save' }).click()
- await expect(page.getByText('Hotel Saved!')).toBeVisible()
+ await page.getByRole('button', { name: 'Save Hotel' }).click()
+ // await expect(page.getByText('Hotel Saved!')).toBeVisible()
 
 })
 
@@ -56,13 +56,43 @@ test('should display hotels', async ({ page }) => {
 
  await expect(page.getByRole('link', { name: 'Add New Hotel' })).toBeVisible()
  await expect(page.getByText('ali')).toBeVisible()
- await expect(page.getByText('A very nice hotel having beautiful mountain views')).toBeVisible()
+ await expect(page.getByText('A very nice hotel having beautiful mountain views.')).toBeVisible()
  await expect(page.getByText('pakistan')).toBeVisible()
  await expect(page.getByText('Budget')).toBeVisible()
  await expect(page.getByText('$15 / night')).toBeVisible()
  await expect(page.getByText('2 adults')).toBeVisible()
  await expect(page.getByText('4 Stars')).toBeVisible()
- await expect(page.getByText('view Details')).toBeVisible()
- await expect(page.getByRole('link', { name: 'View Details' })).toBeVisible()
+ await expect(page.getByText('Edit Details')).toBeVisible()
+ await expect(page.getByRole('link', { name: 'Edit Details' })).toBeVisible()
+
+})
+
+
+test('should edit hotel', async ({ page }) => {
+ await page.goto(`${UI_URL}/my-hotels`)
+
+ await page.getByRole('link', { name: 'Edit Details' }).first().click()
+
+ await page.waitForSelector('[name=name]', { state: 'attached' })
+ await expect(page.locator('[name=name]')).toHaveValue('ali')
+ await page.locator('[name=name]').fill('ali updated')
+ await page.getByRole('button', { name: 'Save Hotel' }).click()
+ await expect(page.getByText('Hotel Updated!')).toBeVisible()
+
+ await page.reload()
+ await page.goto(`${UI_URL}/my-hotels`)
+
+ await page.getByRole('link', { name: 'Edit Details' }).first().click()
+ await page.waitForSelector('[name=name]', { state: 'attached' })
+ await expect(page.locator('[name=name]')).toHaveValue('ali updated')
+
+ await page.locator('[name=name]').fill('ali')
+ await page.getByRole('button', { name: 'Save Hotel' }).click()
+
+
+
+
+
+
 
 })

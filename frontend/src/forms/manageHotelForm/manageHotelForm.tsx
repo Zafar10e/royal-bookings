@@ -33,13 +33,11 @@ const ManageHotelForm = ({ onSave, isPending, hotel, title }: Props) => {
  const formMethods = useForm<HotelFormData>()
  const { handleSubmit, reset } = formMethods
 
- {
-  hotel && (
-   useEffect(() => {
-    reset(hotel)
-   }, [hotel])
-  )
- }
+ useEffect(() => {
+  reset(hotel)
+ }, [hotel])
+
+
 
 
  const onSubmit = handleSubmit((formDataJson: HotelFormData) => {
@@ -64,8 +62,7 @@ const ManageHotelForm = ({ onSave, isPending, hotel, title }: Props) => {
   formDataJson.imageUrls.forEach((imageUrl, i) => {
    formData.append(`imageUrls[${i}]`, imageUrl)
   })
-
-  Array.from(formDataJson.imageFiles).forEach(imageFile => {
+  formDataJson.imageFiles && Array.from(formDataJson.imageFiles).forEach(imageFile => {
    formData.append('imageFiles', imageFile)
   })
 

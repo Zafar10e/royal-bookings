@@ -22,7 +22,7 @@ const EditHotel = () => {
   const { mutate, isPending } = useMutation({
     mutationFn: apiClient.updateMyHotelById,
     onSuccess: () => {
-      showToast({ message: 'Hotel updated successfully!', type: 'SUCCESS' })
+      showToast({ message: 'Hotel Updated!', type: 'SUCCESS' })
       navigate('/')
     },
     onError: (err) => {
@@ -35,7 +35,8 @@ const EditHotel = () => {
   }
 
   return (
-    hotel ? <ManageHotelForm onSave={handleSave} isPending={isPending} hotel={hotel} title='Edit Hotel' />
+    hotel ?
+      <ManageHotelForm onSave={handleSave} isPending={isPending} hotel={hotel} title='Edit Hotel' />
       : <div className='flex flex-col flex-1 justify-center items-center mt-10 font-semibold text-lg'> Loading...</div>
   )
 

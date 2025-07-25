@@ -5,6 +5,8 @@ import { HotelFormData } from "./manageHotelForm"
 const DetailsSection = () => {
  const { register, formState: { errors } } = useFormContext<HotelFormData>()
 
+
+
  return (
   <div className="flex flex-col gap-3 px-10">
    <label className="flex flex-col text-gray-700 font-semibold">

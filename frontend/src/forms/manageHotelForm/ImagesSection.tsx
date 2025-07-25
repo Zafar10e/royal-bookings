@@ -20,8 +20,8 @@ const ImagesSection = () => {
    <h2 className="text-2xl font-semibold text-gray-700 pb-3">Images</h2>
    {existingImageUrls && (
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 items-center justify-center py-8 p-6 sm:px-8 bg-gray-100 rounded-md gap-4">
-     {existingImageUrls.map((url) => (
-      <div className=" relative group">
+     {existingImageUrls.map((url, i) => (
+      <div key={i} className=" relative group">
        <img src={url} className="min-h-full object-cover rounded-md" />
        <button
         onClick={(e) => handleDelete(e, url)}
@@ -39,7 +39,7 @@ const ImagesSection = () => {
      <input type="file" multiple accept="image/*" className="w-52 sm:w-auto cursor-pointer"
       {...register('imageFiles', {
        validate: (imageFiles) => {
-        const totalLength = imageFiles.length + (existingImageUrls?.length || 0)
+        const totalLength = (imageFiles?.length || 0) + (existingImageUrls?.length || 0)
         if (totalLength === 0) {
          return '*Atleast one image required!'
         }

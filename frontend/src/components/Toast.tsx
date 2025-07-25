@@ -17,7 +17,7 @@ const Toast = ({ message, type, onClose }: ToastProps) => {
  }, [onClose])
 
  return (
-  <div className={`fixed top-20 right-14 z-50 px-6 py-3 rounded-md text-white max-w-md ${type === "SUCCESS" ? "bg-green-600" : "bg-red-500"}`}>
+  <div className={`fixed top-20 right-5 z-50 px-6 py-2 rounded-md text-white max-w-md ${type === "SUCCESS" ? "bg-green-600" : "bg-red-500"}`}>
    <div className="flex justify-center items-center">
     <span className="text-lg font-semibold">{message}</span>
    </div>
