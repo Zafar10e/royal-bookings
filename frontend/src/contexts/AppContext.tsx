@@ -8,12 +8,12 @@ type ToastMessage = {
  type: 'SUCCESS' | 'ERROR'
 }
 
-type ContextType = {
+type AppContextType = {
  showToast: (toastMessage: ToastMessage) => void
  isLoggedIn: boolean
 }
 
-const AppContext = createContext<ContextType | undefined>(undefined)
+const AppContext = createContext<AppContextType | undefined>(undefined)
 
 export const AppContextProvider = ({ children }: { children: React.ReactNode }) => {
 
@@ -44,5 +44,5 @@ export const AppContextProvider = ({ children }: { children: React.ReactNode }) 
 
 
 export const useAppContext = () => {
- return useContext(AppContext) as ContextType
+ return useContext(AppContext) as AppContextType
 }
