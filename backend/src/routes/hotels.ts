@@ -22,7 +22,7 @@ router.get('/search', async (req: Request, res: Response) => {
    }
   }
 
-  res.json(response)
+  res.status(201).json(response)
   return
  } catch (err) {
   console.log('Err: [backend/src/routes/hotel.ts/router.get(/search)]', err)

@@ -6,8 +6,7 @@ import { useAppContext } from './contexts/AppContext'
 import MyHotels from './pages/my-hotels'
 import Layout, { MiniLayout } from './layouts/layout'
 import EditHotel from './pages/editHotel'
-
-
+import Search from './pages/search'
 
 
 function App() {
@@ -23,7 +22,7 @@ function App() {
         />
         <Route path='/search' element={
           <Layout>
-            <p>Search Page</p>
+            <Search />
           </Layout>
         }
         />
