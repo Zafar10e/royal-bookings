@@ -3,6 +3,7 @@ import { useSearchContext } from "../contexts/searchContext"
 import * as apiClient from '../api-client'
 import { useState } from "react"
 import SearchResultCard from "../components/searchResultCard"
+import Pagination from "../components/Pagination"
 
 const Search = () => {
  const search = useSearchContext()
@@ -25,8 +26,8 @@ const Search = () => {
  console.log(hotelSearchData)
 
  return (
-  <div className="grid grid-col-1 lg:grid-cols-[250px_1fr] gap-5 pt-10">
-   <div className="rounded-lg border border-slate-300 p-5 h-fit sticky top-10">
+  <div className="grid grid-col-1 lg:grid-cols-[250px_1fr] gap-5 pt-10 lg:pt-15">
+   <div className="rounded-lg border border-slate-300 p-5 h-fit lg:sticky top-10 bg-gray-50">
     <div className="space-y-5">
      <h3 className="text-lg font-semibold text-gray-800 border-b border-slate-300 pb-5">
       Filter by:
@@ -34,7 +35,7 @@ const Search = () => {
      {/* todo filters */}
     </div>
    </div>
-   <div className="flex flex-col gap-5">
+   <div className="flex flex-col gap-5 rounded-lg">
     <div className="flex justify-between items-center">
      <span className="text-xl text-gray-800 font-semibold">
       {hotelSearchData?.pagination.total} Hotels found
@@ -45,6 +46,13 @@ const Search = () => {
     {hotelSearchData?.data.map(hotel => (
      <SearchResultCard hotel={hotel} />
     ))}
+    <div className="py-8">
+     <Pagination
+      page={hotelSearchData?.pagination.page || 1}
+      pages={hotelSearchData?.pagination.pages || 1}
+      onPageChange={(page) => setPage(page)}
+     />
+    </div>
    </div>
   </div>
  )

@@ -59,7 +59,7 @@ const ManageHotelForm = ({ onSave, isPending, hotel, title }: Props) => {
    formData.append(`facilities[${i}]`, facility)
   })
 
-  formDataJson.imageUrls.forEach((imageUrl, i) => {
+  formDataJson.imageUrls && formDataJson.imageUrls.forEach((imageUrl, i) => {
    formData.append(`imageUrls[${i}]`, imageUrl)
   })
   formDataJson.imageFiles && Array.from(formDataJson.imageFiles).forEach(imageFile => {
