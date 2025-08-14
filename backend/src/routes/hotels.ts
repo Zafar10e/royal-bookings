@@ -6,7 +6,10 @@ const router = express.Router()
 
 router.get('/search', async (req: Request, res: Response) => {
   try {
+
     const query = constructSearchQuery(req.query)
+
+    console.log('query: ', query)
 
     let sortOptions = {}
     switch (req.query.sortOptions) {

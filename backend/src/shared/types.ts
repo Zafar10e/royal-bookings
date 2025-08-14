@@ -8,7 +8,7 @@ export type HotelType = {
  description: string
  type: string
  adultCount: number
- chlidCount: number
+ chlidCount?: number
  facilities: string[]
  pricePerNight: number
  starRating: number
