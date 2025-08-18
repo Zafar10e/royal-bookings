@@ -185,3 +185,17 @@ export const searchHotels = async (searchParams: SearchParams): Promise<HotelSea
 
  return resBody
 }
+
+
+export const fetchHotelById = async (hotelId: string) => {
+ const res = await fetch(`${API_BASE_URL}/api/hotels/${hotelId}`)
+
+ const resBody = await res.json()
+
+ if (!res.ok) {
+  throw new Error(resBody.message)
+ }
+
+ return resBody
+}
+

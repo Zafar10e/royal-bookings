@@ -7,6 +7,7 @@ import MyHotels from './pages/my-hotels'
 import Layout, { MiniLayout } from './layouts/layout'
 import EditHotel from './pages/editHotel'
 import Search from './pages/search'
+import Details from './pages/Details'
 
 
 function App() {
@@ -25,6 +26,14 @@ function App() {
             <Search />
           </Layout>
         }
+        />
+        <Route
+          path='/details/:hotelId'
+          element={
+            <MiniLayout>
+              <Details />
+            </MiniLayout>
+          }
         />
         <Route path='/register' element={
           <MiniLayout>

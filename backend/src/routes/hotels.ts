@@ -1,15 +1,15 @@
 import express, { Request, Response } from 'express'
 import Hotel from '../models/hotel'
 import { HotelSearchResponse } from '../shared/types'
+import { param, validationResult } from 'express-validator'
 
 const router = express.Router()
+
 
 router.get('/search', async (req: Request, res: Response) => {
   try {
 
     const query = constructSearchQuery(req.query)
-
-    console.log('query: ', query)
 
     let sortOptions = {}
     switch (req.query.sortOptions) {
@@ -48,6 +48,33 @@ router.get('/search', async (req: Request, res: Response) => {
     return
   }
 })
+
+
+// /api/hotels/12345
+router.get('/:id',
+  [param('id').notEmpty().withMessage('Hotel Id is required')],
+  async (req: Request, res: Response) => {
+    const errs = validationResult(req)
+    if (!errs.isEmpty()) {
+      res.status(400).json({ errors: errs.array() })
+      return
+    }
+
+    const id = req.params.id.toString()
+
+    try {
+      const hotel = await Hotel.findById(id)
+      console.log('new hotel', hotel)
+      res.status(201).json(hotel)
+      return
+    } catch (err) {
+      console.log(err)
+      res.status(500).json({ message: 'Err fetching hotel' })
+      return
+    }
+  }
+)
+
 
 
 const constructSearchQuery = (queryParams: any) => {
