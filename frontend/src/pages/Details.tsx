@@ -3,6 +3,7 @@ import { useParams } from "react-router"
 import * as apiClient from '../api-client'
 import { AiFillStar } from "react-icons/ai"
 import { SiTicktick } from "react-icons/si"
+import GuestInfoForm from "../forms/guestInfoForm/guestInfoForm"
 
 
 const Details = () => {
@@ -53,7 +54,10 @@ const Details = () => {
      {hotel.description}
     </div>
     <div className="h-fit">
-     {/* <GuestInfo /> */}
+     <GuestInfoForm
+      pricePerNight={hotel.pricePerNight}
+      hotelId={hotel._id}
+     />
     </div>
    </div>
   </div>
