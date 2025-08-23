@@ -1,6 +1,8 @@
 import DatePicker from "react-datepicker"
 import { useForm } from "react-hook-form"
 import { useSearchContext } from "../../contexts/searchContext"
+import { useAppContext } from "../../contexts/AppContext"
+import { useLocation, useNavigate } from "react-router"
 
 type Props = {
  hotelId: string
@@ -15,9 +17,19 @@ type GuestInfoFormData = {
 }
 
 const GuestInfoForm = ({ hotelId, pricePerNight }: Props) => {
- const search = useSearchContext()
+ const searchContext = useSearchContext()
+ const { isLoggedIn } = useAppContext()
+ const navigate = useNavigate()
+ const location = useLocation()
 
- const { watch, register, handleSubmit, setValue, formState: { errors } } = useForm<GuestInfoFormData>()
+ const { watch, register, handleSubmit, setValue, formState: { errors } } = useForm<GuestInfoFormData>({
+  defaultValues: {
+   checkIn: searchContext.checkIn,
+   checkOut: searchContext.checkOut,
+   adultCount: searchContext.adultCount,
+   childCount: searchContext.childCount
+  }
+ })
 
  const checkIn = watch('checkIn')
  const checkOut = watch('checkOut')
@@ -25,13 +37,39 @@ const GuestInfoForm = ({ hotelId, pricePerNight }: Props) => {
  const maxDate = new Date()
  maxDate.setFullYear(maxDate.getFullYear() + 1)
 
+ const onSignInClick = (data: GuestInfoFormData) => {
+  searchContext.saveSearchValues(
+   '',
+   data.checkIn,
+   data.checkOut,
+   data.adultCount,
+   data.childCount
+  )
+  navigate('/sign-in', { state: { from: location } })
+  console.log(location)
+ }
+
+ const onSubmit = (data: GuestInfoFormData) => {
+  searchContext.saveSearchValues(
+   '',
+   data.checkIn,
+   data.checkOut,
+   data.adultCount,
+   data.childCount
+  )
+  navigate(`/hotel/${hotelId}/booking`)
+ }
+
  return (
   <div className="flex flex-col p-5 bg-blue-100 gap-5 rounded-lg">
    <h3 className="pl-2 text-md font-semibold">
     ${pricePerNight}
     <span className="text-sm font-normal"> / night</span>
    </h3>
-   <form>
+   <form
+    onSubmit={isLoggedIn
+     ? handleSubmit(onSubmit)
+     : handleSubmit(onSignInClick)}>
     <div className="grid grid-cols-1 gap-4 items-center">
      <div>
       <DatePicker
@@ -100,6 +138,10 @@ const GuestInfoForm = ({ hotelId, pricePerNight }: Props) => {
        </span>
       )}
      </div>
+     {isLoggedIn
+      ? (<button className="bg-blue-600 hover:bg-blue-500 rounded-md text-white text-lg font-semibold cursor-pointer py-1.5 mt-2 ">Book Now</button>)
+      : (<button className="bg-blue-600 hover:bg-blue-500 rounded-md py-1.5 text-white text-lg font-semibold mt-2 cursor-pointer">Sign in to Book</button>)
+     }
     </div>
    </form>
   </div>
