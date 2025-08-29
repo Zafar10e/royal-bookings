@@ -8,6 +8,7 @@ import Layout, { MiniLayout } from './layouts/layout'
 import EditHotel from './pages/editHotel'
 import Search from './pages/search'
 import Details from './pages/Details'
+import Booking from './pages/booking'
 
 
 function App() {
@@ -48,6 +49,15 @@ function App() {
 
         {isLoggedIn && (
           <>
+            <Route
+              path='/hotel/:hotelId/booking'
+              element={
+                <MiniLayout>
+                  <Booking />
+                </MiniLayout>
+              }
+            />
+
             <Route path='/add-hotel' element={
               <MiniLayout>
                 <AddHotel />
