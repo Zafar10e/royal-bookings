@@ -13,7 +13,13 @@ type BookingFormData = {
 
 
 const BookingForm = ({ currentUser }: Props) => {
- const { handleSubmit, register } = useForm<BookingFormData>()
+ const { handleSubmit, register } = useForm<BookingFormData>({
+  defaultValues: {
+   firstName: currentUser.firstName,
+   lastName: currentUser.lastName,
+   email: currentUser.email
+  }
+ })
 
  return (
   <form className="flex flex-col flex-1 gap-3 rounded-lg border border-slate-300 p-5">
