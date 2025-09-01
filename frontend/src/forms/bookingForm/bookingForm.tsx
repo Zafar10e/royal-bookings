@@ -23,12 +23,12 @@ const BookingForm = ({ currentUser }: Props) => {
 
  return (
   <form className="flex flex-col flex-1 gap-3 rounded-lg border border-slate-300 p-5">
-   <h3 className="text-xl font-bold">Confirm Your Datails</h3>
+   <h3 className="text-xl text-gray-800 font-bold">Confirm Your Datails</h3>
    <div className="flex flex-1 gap-3">
     <label className="flex flex-1 flex-col text-gray-700 text-sm font-semibold">
      First Name
      <input
-      className="flex flex-1 border border-gray-300 bg-gray-200 rounded px-2 py-1.5 text-normal focus:outline- focus:border-2"
+      className="flex border border-gray-300 bg-gray-200 rounded p-2 text-normal"
       type="text"
       readOnly
       disabled
@@ -38,7 +38,7 @@ const BookingForm = ({ currentUser }: Props) => {
     <label className="flex flex-1 flex-col text-gray-700 text-sm font-semibold">
      Last Name
      <input
-      className="flex flex-1 border border-gray-300 bg-gray-200 rounded font-normal focus:outline-none focus:border-2 px-2 py-1.5"
+      className="border border-gray-300 bg-gray-200 rounded font-normal p-2"
       type="text"
       readOnly
       disabled
@@ -49,7 +49,7 @@ const BookingForm = ({ currentUser }: Props) => {
    <label className="flex flex-1 flex-col">
     Email
     <input
-     className="flex flex-1 border border-gray-300 rounded font-normal text-gray-700 focus:outline-none focus:border-2 px-2 py-1.5 bg-gray-200"
+     className="flex border border-gray-300 rounded font-normal text-gray-700 p-2 bg-gray-200"
      type="email"
      readOnly
      disabled
