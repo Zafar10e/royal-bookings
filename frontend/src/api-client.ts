@@ -1,6 +1,7 @@
 import { RegisterFormData } from "./pages/register";
 import { SignInFormData } from "./pages/sign-in";
 import { HotelSearchResponse, HotelType, PaymentIntentResponse, UserType } from '../../backend/src/shared/types'
+import { BookingFormData } from "./forms/bookingForm/bookingForm";
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || '';
 
@@ -228,6 +229,28 @@ export const createPaymentIntent = async (hotelId: string, numberOfNights: strin
 
  if (!res.ok) {
   throw new Error(resBody.message)
+ }
+
+ return resBody
+}
+
+
+export const createRoomBooking = async (formData: BookingFormData) => {
+ const res = await fetch(`${API_BASE_URL}/api/hotels/${formData.hotelId}/bookings`,
+  {
+   method: 'POST',
+   headers: {
+    'Content-Type': 'application/json'
+   },
+   credentials: 'include',
+   body: JSON.stringify(formData)
+  }
+ )
+
+ const resBody = await res.json()
+
+ if (!res.ok) {
+  throw new Error('Err booking room')
  }
 
  return resBody
