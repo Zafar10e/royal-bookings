@@ -9,6 +9,7 @@ import EditHotel from './pages/editHotel'
 import Search from './pages/search'
 import Details from './pages/Details'
 import Booking from './pages/booking'
+import MyBookings from './pages/myBookings'
 
 
 function App() {
@@ -78,6 +79,16 @@ function App() {
                 <MyHotels />
               </MiniLayout>
             } />
+
+            <Route
+              path='/my-bookings'
+              element={
+                <MiniLayout>
+                  <MyBookings />
+                </MiniLayout>
+              }
+            />
+
           </>
         )}
         <Route path='*' element={<Navigate to='/' />} />
