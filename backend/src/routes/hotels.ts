@@ -56,7 +56,7 @@ router.post('/:hotelId/bookings', verifyToken, async (req: Request, res: Respons
 
     const paymentIntent = await stripe.paymentIntents.retrieve(paymentIntentId as string)
 
-    if (!paymentIntentId) {
+    if (!paymentIntent) {
       res.status(400).json({ message: 'Payment intent not found' })
     }
 
