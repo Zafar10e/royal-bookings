@@ -262,7 +262,7 @@ export const createRoomBooking = async (formData: BookingFormData) => {
  const resBody = await res.json()
 
  if (!res.ok) {
-  throw new Error('Err booking room')
+  throw new Error(resBody.message)
  }
 
  return resBody

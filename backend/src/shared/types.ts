@@ -35,7 +35,7 @@ export type BookingType = {
  childCount: number
  checkIn: Date
  checkOut: Date
- totelCost: number
+ totalCost: number
 }
 
 
