@@ -10,6 +10,7 @@ import Search from './pages/search'
 import Details from './pages/Details'
 import Booking from './pages/booking'
 import MyBookings from './pages/myBookings'
+import Home from './pages/home'
 
 
 function App() {
@@ -19,7 +20,7 @@ function App() {
       <Routes>
         <Route path='/' element={
           <Layout>
-            <p>Home Page</p>
+            <Home />
           </Layout>
         }
         />
